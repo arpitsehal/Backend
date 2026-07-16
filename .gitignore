@@ -1,0 +1,26 @@
+# Claws — local orchestration runtime, never committed
+.claws/
+
+# Dependencies
+node_modules/
+
+# Secrets & environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

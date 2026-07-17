@@ -19,6 +19,7 @@ assumes the previous one.
 | # | Notes | Project | Core Topic |
 |---|-------|---------|-----------|
 | 1 | [NOTES1.md](NOTES1.md) | *(theory only)* | Roadmap — server, runtime, the two pillars, folder structure |
+| 2 | [NOTES2.md](NOTES2.md) | [`index.js`](index.js) | First Express server + deploying it to production |
 
 *More steps land here as I work through them.*
 
@@ -40,9 +41,35 @@ the three things backend code ever does, and the industry-standard folder struct
 
 ---
 
+### Step 2 — Your First Server, and Shipping It
+**Project:** [`index.js`](index.js) · **Read:** [NOTES2.md](NOTES2.md)
+
+Theory becomes a URL. `npm init` → `package.json`, then a four-route Express server in
+twenty lines: `express()` builds the app, `app.get()` registers routes, `app.listen()`
+**binds the port** — the moment it becomes a server. The real lesson is the last mile:
+production is the *same code with different configuration*. `dotenv.config()` first,
+`.env` never committed, and **`process.env.PORT`** because the *host* picks the port, not
+you. Then build command vs start command, why your env vars must be retyped in the
+dashboard, and the CORS wall waiting on the other side.
+
+> **Interview hooks:** Why `process.env.PORT` and not `3000`? Why must `dotenv.config()` be
+> the first line? `.env` is gitignored — so how does production get its variables? Build
+> command vs start command? Is CORS a server error?
+
+**Run it:**
+```bash
+npm install
+cp .env.example .env    # Windows: copy .env.example .env
+npm start               # → http://localhost:3000
+```
+Routes: `/` · `/twitter` · `/login` · `/youtube`
+
+---
+
 ## Suggested Revision Order (Day Before an Interview)
 
 1. **NOTES1** — server = software, runtime vs framework, the two pillars, folder structure
+2. **NOTES2** — `process.env.PORT`, `.env` vs dashboard vars, build vs start, CORS
 
 Most notes end with a **Quick self-test** and a **one-paragraph summary** — cover the
 answers and use those as flashcards.

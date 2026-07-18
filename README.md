@@ -20,6 +20,7 @@ assumes the previous one.
 |---|-------|---------|-----------|
 | 1 | [NOTES1.md](NOTES1.md) | *(theory only)* | Roadmap — server, runtime, the two pillars, folder structure |
 | 2 | [NOTES2.md](NOTES2.md) | [`index.js`](index.js) | First Express server + deploying it to production |
+| 3 | [NOTES3.md](NOTES3.md) | [`FullStack_basic/`](FullStack_basic/) | Connecting React to Express — proxy, CORS, origins |
 
 *More steps land here as I work through them.*
 
@@ -66,10 +67,36 @@ Routes: `/` · `/twitter` · `/login` · `/youtube`
 
 ---
 
+### Step 3 — Wiring a Frontend to It
+**Project:** [`FullStack_basic/`](FullStack_basic/) · **Read:** [NOTES3.md](NOTES3.md)
+
+The CORS wall NOTES2 pointed at, hit properly. A React (Vite) app and an Express API are
+**two servers on two ports**, and since an **origin is protocol + host + port**, the browser
+treats them as different websites. Covers fetching with `useEffect` + `axios` (why
+`useState([])`, why the empty dependency array, why `response.data`), why `map` with braces
+and no `return` silently renders nothing, and then the main event: **CORS is a browser rule,
+not a server error** — fixed in development by a **Vite proxy** that keeps everything on one
+origin, and in production by the **`cors` middleware** or serving the built frontend from
+Express, because the proxy disappears at build time.
+
+> **Interview hooks:** What is an origin? Is CORS a server error? Why does it work in
+> Postman but not the browser? How does a proxy fix CORS? Does the proxy work in
+> production? Why not `origin: '*'`?
+
+**Run it — two terminals:**
+```bash
+cd FullStack_basic/backend  && npm install && npm start     # → http://localhost:3000
+cd FullStack_basic/frontend && npm install && npm run dev   # → http://localhost:5173
+```
+API: `/api/jokes` · proxied through Vite, so the browser only ever sees one origin
+
+---
+
 ## Suggested Revision Order (Day Before an Interview)
 
 1. **NOTES1** — server = software, runtime vs framework, the two pillars, folder structure
 2. **NOTES2** — `process.env.PORT`, `.env` vs dashboard vars, build vs start, CORS
+3. **NOTES3** — origin = protocol+host+port, CORS is the browser, proxy is dev-only
 
 Most notes end with a **Quick self-test** and a **one-paragraph summary** — cover the
 answers and use those as flashcards.

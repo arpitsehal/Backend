@@ -1,0 +1,13 @@
+{
+  "name": "mongoose-models",
+  "version": "1.0.0",
+  "description": "Mongoose schema/data-modelling practice — NOTES4",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.0.0"
+  }
+}
